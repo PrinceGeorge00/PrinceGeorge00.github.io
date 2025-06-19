@@ -99,3 +99,26 @@ footer {
   background-color: #111;
   border-top: 1px solid #1f1f1f;
 }
+
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 1.5em;
+}
+
+.gallery img {
+  width: 280px;
+  max-width: 90%;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 255, 204, 0.08);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 255, 204, 0.3);
+}
+
