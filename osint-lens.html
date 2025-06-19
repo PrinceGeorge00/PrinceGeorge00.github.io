@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Darkseid OSINT‑Lens Tool</title>
+  <link rel="stylesheet" href="../style.css"/>
+</head>
+<body>
+  <div class="hero">
+    <h1>Darkseid OSINT‑Lens Tool</h1>
+    <a href="../index.html">← Home</a>
+  </div>
+  <div class="section">
+    <h2>Overview</h2>
+    <p>Darkseid is a Python-based OSINT tool that extracts image metadata, runs reverse-image search, plots GPS data, and auto-generates PDF reports.</p>
+  </div>
+  <div class="section">
+    <h2>🛠 Features & Workflow</h2>
+    <ul>
+      <li>✔ Extracts EXIF metadata from images</li>
+      <li>✔ Uses Google reverse image search via headless browser</li>
+      <li>✔ If GPS data present: plots coordinates on a map</li>
+      <li>✔ Generates a PDF summary with findings</li>
+    </ul>
+    <p>Tools used: Python, Pillow, Selenium, Folium, ReportLab</p>
+  </div>
+  <div class="section">
+    <h2>Installation & Usage</h2>
+    <pre><code>git clone https://github.com/PrinceGeorge00/Darkseid
+cd Darkseid
+pip install -r requirements.txt
+python osint_lens.py --image input.jpg --output report.pdf</code></pre>
+  </div>
+  <div class="section">
+    <h2>Sample Report</h2>
+    <p>Generated GPS map and summarized metadata for a test image.</p>
+  </div>
+  <footer><p>Return <a href="../index.html">Home</a></p></footer>
+</body>
+</html>
